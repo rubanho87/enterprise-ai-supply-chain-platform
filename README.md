@@ -128,6 +128,6 @@ Next:
 
 ## Author
 
-**Emmanuel Joël Ndolo Ndolo Mayunda**
+**Ruben KANKU**
 
 Data Analytics • Data Science • AI • Digital Transformation
