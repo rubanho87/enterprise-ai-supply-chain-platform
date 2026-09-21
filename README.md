@@ -1,334 +1,578 @@
 # Enterprise AI Supply Chain Platform
 
-End-to-end **Supply Chain Data & AI Platform** built with Databricks Lakehouse, Apache Spark, SQL, Machine Learning, and interactive Risk Intelligence dashboards.
+An end-to-end **AI-powered Supply Chain Decision Intelligence Platform** combining Databricks, FastAPI, React, and an AI assistant to transform operational retail data into inventory intelligence, stockout alerts, transfer recommendations, critical actions, and management-ready insights.
 
-The project demonstrates how operational retail and supply chain data can be transformed into analytics, predictive models, risk intelligence, and decision-support solutions.
+The project demonstrates a production-oriented architecture from data engineering and analytics to API serving and an operational decision interface.
 
 ---
 
 ## Project Overview
 
-This project implements an end-to-end Data & AI pipeline for retail and supply chain analytics.
+Supply chain teams often have data but still struggle to answer operational questions such as:
 
-Raw operational data is progressively transformed into clean analytical datasets, business KPIs, machine learning features, predictive models, supply chain risk indicators, and interactive executive dashboards.
+- Which stores are at risk of stockout?
+- Which products require immediate attention?
+- Where is inventory excessive?
+- Can excess stock from one store cover shortages in another?
+- Which actions should management prioritize?
+- Can business users query supply-chain information using natural language?
 
-### End-to-End Flow
+This platform addresses these problems through an integrated decision-intelligence architecture.
 
 ```text
-Raw Operational Data
-        ↓
-Bronze Layer
-        ↓
-Silver Layer
-        ↓
-Gold Analytical Layer
-        ↓
-Analytics & KPIs
-        ↓
-Machine Learning
-        ↓
-Risk Intelligence
-        ↓
-Executive Dashboard
+Operational Data
+       |
+       v
+Databricks Lakehouse
+       |
+       v
+Data Engineering & Analytics
+       |
+       v
+Supply Chain Risk Engine
+       |
+       +----------------------+
+       |                      |
+       v                      v
+Inventory Intelligence   Stockout Intelligence
+       |                      |
+       +-----------+----------+
+                   |
+                   v
+        Transfer Recommendations
+                   |
+                   v
+           Critical Actions
+                   |
+                   v
+        Databricks Serving Layer
+                   |
+                   v
+              FastAPI API
+                   |
+          +--------+--------+
+          |                 |
+          v                 v
+ React Command Center    AI Assistant
 ```
 
-The architecture follows the Databricks Lakehouse approach and separates ingestion, transformation, analytics, machine learning, and decision intelligence.
-
 ---
 
-## Business Objectives
+## Key Capabilities
 
-The platform is designed to help organizations:
+### Executive Overview
 
-- Monitor sales and supply chain operations
-- Analyze inventory and product performance
-- Identify products and stores exposed to operational risk
-- Detect abnormal operational patterns
-- Prioritize critical supply chain situations
-- Support demand forecasting
-- Transform operational data into actionable intelligence
-- Support data-driven operational and executive decisions
+A management-oriented command center providing a consolidated view of supply-chain performance and operational risks.
 
----
+The dashboard surfaces key indicators and enables decision makers to quickly identify areas requiring attention.
 
-## Lakehouse Architecture
+### Inventory Intelligence
 
-### Bronze Layer
+Provides store- and product-level inventory visibility, including:
 
-Raw operational data ingestion and preservation.
+- available stock
+- inventory status
+- product information
+- store information
+- stock movements
+- inventory health indicators
 
-The Bronze layer maintains source-level information before business transformations are applied.
+### Stockout Risk Intelligence
 
-### Silver Layer
+Detects products and stores exposed to stock shortages using recent sales and inventory information.
 
-Data cleaning, standardization, validation, deduplication, and preparation of analytical dimensions.
+The serving layer includes operational indicators such as:
 
-This layer creates reliable datasets that can be reused across analytics and machine learning workflows.
+- current stock
+- 30-day sales
+- average daily sales
+- days of stock
+- stockout priority
+- priority ranking
+- inventory status
 
-### Gold Layer
+### Intelligent Stock Transfers
 
-Business-ready analytical datasets, aggregations, and KPIs.
+Generates inventory rebalancing recommendations between stores.
 
-Gold datasets provide optimized information for reporting, business analysis, machine learning, and decision-support applications.
+For each recommendation, the system identifies:
 
-### Analytics Layer
+- product
+- donor store
+- receiver store
+- donor stock
+- receiver stock
+- uncovered demand
+- transferable stock
+- proposed transfer quantity
+- replenishment priority
 
-Business metrics and analytical views are generated for:
+Instead of exposing internal surrogate keys to business users, the application resolves stores into readable business names and codes.
 
-- Sales performance
-- Product performance
-- Store performance
-- Inventory analysis
-- Supply chain operations
-- Operational anomalies
+Example:
 
-### Machine Learning Layer
+```text
+DELVAUX 3 (38)  ->  POMPAGE SSC (AK)
+```
 
-The platform includes forecasting experiments and machine learning workflows designed to support predictive supply chain analytics.
+### Critical Actions
 
-### Risk Intelligence Layer
+Converts analytical risks into a prioritized operational action queue.
 
-Analytical and operational indicators are transformed into product-store risk scores and severity classifications.
+The interface highlights:
 
-This layer helps identify and prioritize situations requiring operational attention.
+- severity
+- primary risk
+- risk score
+- affected store
+- affected product
+- operational action required
 
-### BI & Decision Intelligence Layer
+This allows management to move from analytics to action.
 
-Databricks AI/BI dashboards transform the analytical and risk datasets into interactive decision-support interfaces for operational and executive users.
+### Supply Chain AI Assistant
 
----
+The platform also includes an AI assistant designed for natural-language interaction with supply-chain information.
 
-## Supply Chain Risk Intelligence Dashboard
+The assistant architecture includes:
 
-A dedicated **Supply Chain Risk Intelligence Dashboard** was developed in Databricks to provide an executive view of operational risk across stores and products.
+- intent routing
+- decision context
+- grounding
+- AI decision services
+- LLM integration
+- supply-chain context retrieval
 
-### Executive KPIs
-
-| KPI | Value |
-|---|---:|
-| Total Store-Products | 3,071 |
-| Products at Risk | 2,126 |
-| Critical Risks | 398 |
-| Risk Rate | 69.23% |
-
-### Dashboard Capabilities
-
-The dashboard provides:
-
-- Executive supply chain risk monitoring
-- Store-level risk analysis
-- Product-level risk analysis
-- Risk severity distribution
-- Critical, High, Medium, and Healthy risk classification
-- Critical, High, and Medium occurrence analysis
-- Average product risk scoring
-- Top stores by products at risk
-- Top stores by risk rate
-- Top products at risk
-- Top products by average risk score
-- Interactive Store filtering
-- Interactive Risk Level filtering
-- Detailed product risk investigation
-
-### Dashboard Preview
-
-![Supply Chain Risk Intelligence Dashboard](docs/images/img_supply.png)
-
-The dashboard converts analytical outputs into a decision-support interface that allows users to move from global risk indicators to individual product-level investigation.
-
----
-
-## Machine Learning
-
-The project includes demand forecasting experiments using several baseline and machine learning approaches.
-
-### Models Evaluated
-
-- Naive-1 baseline
-- Naive-7 baseline
-- Rolling mean baseline
-- Gradient Boosted Tree Regressor
-
-The Gradient Boosted Tree model was implemented using Spark ML.
-
-The current machine learning workflow establishes the foundation for experiment tracking, model comparison, model management, and production-oriented ML workflows.
-
----
-
-## Risk Intelligence
-
-The Risk Intelligence component extends traditional BI by transforming operational indicators into prioritized risk information.
-
-The analytical workflow evaluates product-store situations and produces indicators such as:
-
-- Risk score
-- Risk level
-- Critical occurrences
-- High-risk occurrences
-- Medium-risk occurrences
-- Store occurrences
-- Stores at risk
-- Average product risk score
-
-These indicators are consumed by the executive dashboard for operational prioritization.
+The project supports local LLM experimentation through **Ollama**, allowing AI capabilities to be developed without requiring a paid external LLM API.
 
 ---
 
 ## Technology Stack
 
-### Data Engineering
-
-- Databricks
-- Apache Spark
-- PySpark
-- Spark SQL
-- Delta Lake
-- Databricks Lakehouse
-
-### Analytics
-
-- SQL
-- Python
-- Databricks SQL
-- Analytical marts
-- KPI modeling
-
-### Machine Learning
-
-- Spark ML
-- Gradient Boosted Tree Regressor
-- Forecasting baselines
-- Feature engineering
-
-### Business Intelligence
-
-- Databricks AI/BI Dashboards
-- Interactive filters
-- Executive KPIs
-- Risk Intelligence visualizations
-
-### Development & Version Control
-
-- Python
-- SQL
-- Git
-- GitHub
+| Layer | Technology |
+|---|---|
+| Data Platform | Databricks |
+| Data Processing | SQL / Python |
+| Analytical Architecture | Lakehouse |
+| Serving Layer | Databricks SQL |
+| Backend API | FastAPI |
+| Backend Language | Python |
+| Frontend | React |
+| Build Tool | Vite |
+| UI Framework | Material UI |
+| API Communication | Axios |
+| AI / LLM | Ollama |
+| Architecture | REST API + Decision Intelligence |
 
 ---
 
-## Project Pipeline
+## Databricks Architecture
 
-The current implementation follows this workflow:
+The analytical platform is organized into multiple logical layers.
+
+### Gold Layer
+
+The Gold layer contains business-ready analytical datasets used by the risk and decision engines.
+
+Examples include:
 
 ```text
-01 - Raw Data Ingestion
-        ↓
-02 - Bronze Cleaning
-        ↓
-03 - Silver Dimensions
-        ↓
-04 - Gold Analytical Marts
-        ↓
-05 - Anomaly Detection
-        ↓
-06 - Forecasting Baselines & GBT Model
-        ↓
-07 - Supply Chain Risk Analytics
-        ↓
-08 - Risk Intelligence Dashboard
+daily_sales
+dim_store
+fact_inventory
+fact_sales
+fact_stock_movements
+inventory_health
+inventory_health_v2
+replenishment_recommendations
+shop_risk_score
+stockout_alerts
+supply_chain_risk_mart
+```
+
+### Mart Layer
+
+Decision-oriented analytical marts provide consolidated risk information for operational applications.
+
+Examples include:
+
+```text
+critical_risk_actions
+risk_by_store
+supply_chain_critical_actions
+supply_chain_risk_by_store
+supply_chain_risk_dashboard
+```
+
+### Serving Layer
+
+The serving layer exposes curated datasets optimized for the operational application.
+
+Current serving objects include:
+
+```text
+critical_risk_actions
+executive_risk
+product_risk_score
+risk_by_product
+risk_by_store
+stock_transfer_recommendations
+stockout_alerts
+```
+
+The FastAPI backend queries this layer instead of exposing raw analytical tables directly to the frontend.
+
+---
+
+## Backend API
+
+The backend is implemented with **FastAPI** and acts as the application service layer between Databricks and the React frontend.
+
+Example API areas include:
+
+```text
+/api/v1/stockouts/alerts
+/api/v1/transfers/recommendations
+```
+
+Additional routes support inventory intelligence, executive risk information, critical actions, and AI-assisted decision workflows.
+
+### Example Transfer Response
+
+```json
+{
+  "article": "D16090",
+  "donor_store_code": "38",
+  "donor_store_name": "DELVAUX 3",
+  "receiver_store_code": "AK",
+  "receiver_store_name": "POMPAGE SSC",
+  "donor_stock": 902,
+  "receiver_stock": 15,
+  "uncovered_qty": 208,
+  "proposed_transfer_qty": 208,
+  "replenishment_priority": "URGENT"
+}
 ```
 
 ---
 
-## Data Privacy
+## Frontend Command Center
 
-The original operational datasets used during development are **not included in this public repository**.
+The React application provides the operational interface for the platform.
 
-The public repository is intended as a technical and professional portfolio and contains only non-sensitive artifacts such as:
+Main application pages include:
 
-- Architecture documentation
-- Analytical logic
-- Project documentation
-- Selected code and notebooks
-- Non-sensitive screenshots
-- Portfolio artifacts
+```text
+Executive Overview
+Inventory
+Stockout Risks
+Stock Transfers
+Critical Actions
+Supply Chain AI Assistant
+```
 
-No confidential operational dataset, credential, password, connection string, or sensitive business information should be committed to this repository.
+The interface was designed as a supply-chain command center rather than a traditional reporting dashboard.
+
+Its purpose is to help users answer:
+
+> What is happening?
+
+> Where is the risk?
+
+> What should we do?
+
+---
+
+## Project Structure
+
+```text
+enterprise-ai-supply-chain-platform/
+|
+|-- app/
+|   |-- api/
+|   |   `-- routes/
+|   |
+|   |-- db/
+|   |
+|   `-- services/
+|       |-- ai_assistant.py
+|       |-- ai_decision.py
+|       |-- context_router.py
+|       |-- decision_context.py
+|       |-- grounding.py
+|       |-- intent_router.py
+|       `-- ollama.py
+|
+|-- frontend/
+|   |-- src/
+|   |   |-- components/
+|   |   |   `-- layout/
+|   |   |       |-- Sidebar.jsx
+|   |   |       `-- Topbar.jsx
+|   |   |
+|   |   |-- pages/
+|   |   |   |-- Dashboard.jsx
+|   |   |   |-- Inventory.jsx
+|   |   |   |-- StockoutRisks.jsx
+|   |   |   |-- Transfers.jsx
+|   |   |   |-- CriticalActions.jsx
+|   |   |   `-- AIAssistant.jsx
+|   |   |
+|   |   |-- services/
+|   |   |   `-- api.js
+|   |   |
+|   |   `-- styles/
+|   |       `-- theme.js
+|   |
+|   `-- package.json
+|
+|-- scripts/
+|   `-- validate_ai_assistant.py
+|
+|-- .env.example
+|-- .gitignore
+|-- requirements.txt
+`-- README.md
+```
+
+---
+
+## Screenshots
+
+The application includes six major operational views:
+
+### Executive Overview
+
+Management-level visibility into supply-chain risks and operational performance.
+
+### Inventory Intelligence
+
+Inventory visibility across products and stores.
+
+### Stockout Risks
+
+Prioritized stockout alerts based on inventory and recent demand.
+
+### Stock Transfers
+
+AI-ready inventory rebalancing recommendations between donor and receiver stores.
+
+### Critical Actions
+
+Prioritized management actions generated from operational risk signals.
+
+### Supply Chain AI Assistant
+
+Natural-language interface for supply-chain decision support.
+
+> Screenshots can be added to a `docs/screenshots/` directory and referenced from this section.
+
+---
+
+## Running the Backend
+
+Create and activate the Python environment, install dependencies, and configure the environment variables.
+
+```bash
+pip install -r requirements.txt
+```
+
+Create the local environment configuration from:
+
+```text
+.env.example
+```
+
+Then start the FastAPI application according to the project configuration.
+
+Example:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+---
+
+## Running the Frontend
+
+Move into the frontend directory:
+
+```bash
+cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Production build:
+
+```bash
+npm run build
+```
+
+---
+
+## Environment Variables
+
+Sensitive credentials are intentionally excluded from the repository.
+
+Use the provided:
+
+```text
+.env.example
+```
+
+to configure the required environment variables locally.
+
+Do **not** commit:
+
+```text
+.env
+Databricks access tokens
+database credentials
+API secrets
+private infrastructure credentials
+```
+
+---
+
+## Validation
+
+The frontend has been validated using the production build:
+
+```bash
+npm run build
+```
+
+The project also contains an AI assistant validation script:
+
+```bash
+python scripts/validate_ai_assistant.py
+```
+
+---
+
+## Business Value
+
+This project demonstrates how a modern data platform can evolve beyond dashboards.
+
+Traditional BI typically answers:
+
+```text
+What happened?
+```
+
+This platform extends that approach toward:
+
+```text
+What is happening?
+        |
+        v
+What is at risk?
+        |
+        v
+What should be prioritized?
+        |
+        v
+What action should be taken?
+```
+
+The result is a practical **Supply Chain Decision Intelligence Platform** connecting data engineering, analytics, AI, APIs, and an operational user interface.
+
+---
+
+## Use Cases
+
+The architecture can support retail and distribution environments requiring:
+
+- multi-store inventory monitoring
+- stockout prevention
+- inventory rebalancing
+- demand-aware replenishment
+- supply-chain risk prioritization
+- management decision support
+- AI-assisted operational analytics
+
+---
+
+## Engineering Focus
+
+This portfolio project demonstrates practical experience across:
+
+**Data Engineering**
+
+Databricks, analytical data modeling, transformations, marts, serving datasets.
+
+**Data Analytics**
+
+Inventory analysis, demand indicators, stockout detection, store/product risk analysis.
+
+**Backend Engineering**
+
+FastAPI, REST APIs, Databricks query integration, application services.
+
+**Frontend Engineering**
+
+React, Material UI, responsive operational dashboards.
+
+**Artificial Intelligence**
+
+Natural-language interaction, intent routing, grounding, decision context, local LLM integration.
+
+**Decision Intelligence**
+
+Transforming analytical signals into prioritized operational recommendations and actions.
+
+---
+
+## Security
+
+The public repository should contain only code and non-sensitive examples.
+
+Production credentials, access tokens, private business datasets, and infrastructure secrets must remain outside version control.
 
 ---
 
 ## Project Status
 
-**Active Development**
+**Functional end-to-end prototype**
 
-### Completed
+Implemented components:
 
-- Raw data ingestion
-- Bronze layer
-- Silver layer
-- Gold analytical marts
-- Analytical KPIs
-- Anomaly detection
-- Forecasting baselines
-- Gradient Boosted Tree forecasting model
-- Supply chain risk analytics
-- Risk scoring
-- Risk severity classification
-- Supply Chain Risk Intelligence Dashboard
-- Interactive Store and Risk Level filtering
-- GitHub portfolio documentation
-
-### Next Development Phase
-
-The next phase focuses on bringing the machine learning component closer to a production-oriented MLOps architecture:
-
-```text
-MLflow Experiment Tracking
-        ↓
-Model Comparison
-        ↓
-Model Management
-        ↓
-API Integration
-        ↓
-Containerization
-        ↓
-Monitoring
-        ↓
-Production-Oriented Architecture
-```
-
----
-
-## Roadmap
-
-Planned improvements include:
-
-- MLflow experiment tracking
-- Model performance comparison
-- Model registration and lifecycle management
-- Forecasting API
-- FastAPI integration
-- Docker-based deployment architecture
-- Model and data monitoring
-- Automated pipeline execution
-- Additional Supply Chain AI use cases
-- Production-oriented architecture documentation
-
----
-
-## Repository Purpose
-
-This repository demonstrates practical skills across the complete Data & AI lifecycle:
-
-**Data Engineering → Data Analytics → Machine Learning → Risk Intelligence → Business Intelligence → MLOps**
-
-The objective is not only to build predictive models, but to demonstrate how data engineering, analytics, machine learning, and business intelligence can be integrated into an end-to-end enterprise decision-support platform.
+- Databricks analytical layer
+- Supply-chain risk intelligence
+- Stockout alerts
+- Stock-transfer recommendations
+- Critical-action prioritization
+- FastAPI serving backend
+- React operational command center
+- AI assistant architecture
+- Local LLM integration
+- Production frontend build validation
 
 ---
 
 ## Author
 
-**Ruben KANKU**
+**Emmanuel Joël Ndolo Ndolo Mayunda**
 
-Data Analytics • Data Science • Artificial Intelligence • Digital Transformation
+Data & AI | Business Intelligence | Digital Transformation
+
+Democratic Republic of the Congo
+
+---
+
+## Disclaimer
+
+This repository is a portfolio and demonstration project.
+
+Any operational data used during development should be treated according to the applicable confidentiality and data-governance requirements. Sensitive source datasets and credentials are not intended for public distribution.

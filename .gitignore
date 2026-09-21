@@ -1,0 +1,23 @@
+# Environment variables / secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Conda / virtual environments
+.venv/
+venv/
+env/
+
+# VS Code
+.vscode/
+
+# Testing / cache
+.pytest_cache/
+.mypy_cache/
+
+# OS
+.DS_Store
+Thumbs.db
