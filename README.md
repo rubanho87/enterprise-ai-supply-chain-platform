@@ -1,23 +1,23 @@
 # Enterprise AI Supply Chain Platform
 
-An end-to-end **AI-powered Supply Chain Decision Intelligence Platform** combining Databricks, FastAPI, React, and an AI assistant to transform operational retail data into inventory intelligence, stockout alerts, transfer recommendations, critical actions, and management-ready insights.
+An end-to-end **AI-powered Supply Chain Decision Intelligence Platform** combining **Databricks, FastAPI, React, and AI** to transform operational retail data into inventory intelligence, stockout alerts, transfer recommendations, critical actions, and management-ready insights.
 
-The project demonstrates a production-oriented architecture from data engineering and analytics to API serving and an operational decision interface.
+The project demonstrates a production-oriented architecture connecting **data engineering, analytics, decision intelligence, API services, AI-assisted analysis, and an operational command center**.
 
 ---
 
 ## Project Overview
 
-Supply chain teams often have data but still struggle to answer operational questions such as:
+Supply chain teams often have large volumes of operational data but still struggle to answer critical questions such as:
 
 - Which stores are at risk of stockout?
 - Which products require immediate attention?
 - Where is inventory excessive?
 - Can excess stock from one store cover shortages in another?
-- Which actions should management prioritize?
+- Which operational actions should management prioritize?
 - Can business users query supply-chain information using natural language?
 
-This platform addresses these problems through an integrated decision-intelligence architecture.
+This platform addresses these challenges through an integrated **Supply Chain Decision Intelligence architecture**.
 
 ```text
 Operational Data
@@ -64,7 +64,7 @@ Inventory Intelligence   Stockout Intelligence
 
 A management-oriented command center providing a consolidated view of supply-chain performance and operational risks.
 
-The dashboard surfaces key indicators and enables decision makers to quickly identify areas requiring attention.
+The dashboard surfaces key indicators and enables decision-makers to quickly identify stores, products, and operational situations requiring attention.
 
 ### Inventory Intelligence
 
@@ -79,9 +79,9 @@ Provides store- and product-level inventory visibility, including:
 
 ### Stockout Risk Intelligence
 
-Detects products and stores exposed to stock shortages using recent sales and inventory information.
+Detects products and stores exposed to potential stock shortages using inventory positions and recent sales activity.
 
-The serving layer includes operational indicators such as:
+Operational indicators include:
 
 - current stock
 - 30-day sales
@@ -95,7 +95,7 @@ The serving layer includes operational indicators such as:
 
 Generates inventory rebalancing recommendations between stores.
 
-For each recommendation, the system identifies:
+For each recommendation, the platform identifies:
 
 - product
 - donor store
@@ -117,7 +117,7 @@ DELVAUX 3 (38)  ->  POMPAGE SSC (AK)
 
 ### Critical Actions
 
-Converts analytical risks into a prioritized operational action queue.
+Transforms analytical risk signals into a prioritized operational action queue.
 
 The interface highlights:
 
@@ -126,13 +126,13 @@ The interface highlights:
 - risk score
 - affected store
 - affected product
-- operational action required
+- recommended operational action
 
-This allows management to move from analytics to action.
+This enables management to move from **analytics to action**.
 
 ### Supply Chain AI Assistant
 
-The platform also includes an AI assistant designed for natural-language interaction with supply-chain information.
+The platform includes an AI assistant designed for natural-language interaction with supply-chain information.
 
 The assistant architecture includes:
 
@@ -143,7 +143,7 @@ The assistant architecture includes:
 - LLM integration
 - supply-chain context retrieval
 
-The project supports local LLM experimentation through **Ollama**, allowing AI capabilities to be developed without requiring a paid external LLM API.
+The project supports local LLM experimentation through **Ollama**, enabling AI-assisted capabilities without requiring a paid external LLM API.
 
 ---
 
@@ -168,7 +168,7 @@ The project supports local LLM experimentation through **Ollama**, allowing AI c
 
 ## Databricks Architecture
 
-The analytical platform is organized into multiple logical layers.
+The analytical platform is organized into multiple logical layers that progressively transform operational data into decision-ready information.
 
 ### Gold Layer
 
@@ -228,14 +228,21 @@ The FastAPI backend queries this layer instead of exposing raw analytical tables
 
 The backend is implemented with **FastAPI** and acts as the application service layer between Databricks and the React frontend.
 
-Example API areas include:
+API areas include:
 
 ```text
 /api/v1/stockouts/alerts
 /api/v1/transfers/recommendations
 ```
 
-Additional routes support inventory intelligence, executive risk information, critical actions, and AI-assisted decision workflows.
+Additional routes support:
+
+- inventory intelligence
+- executive risk information
+- critical actions
+- stockout intelligence
+- transfer recommendations
+- AI-assisted decision workflows
 
 ### Example Transfer Response
 
@@ -258,7 +265,7 @@ Additional routes support inventory intelligence, executive risk information, cr
 
 ## Frontend Command Center
 
-The React application provides the operational interface for the platform.
+The React application provides the operational interface of the platform.
 
 Main application pages include:
 
@@ -271,15 +278,73 @@ Critical Actions
 Supply Chain AI Assistant
 ```
 
-The interface was designed as a supply-chain command center rather than a traditional reporting dashboard.
+The interface is designed as a **Supply Chain Command Center**, rather than a traditional reporting dashboard.
 
-Its purpose is to help users answer:
+Its purpose is to help users answer three fundamental questions:
 
-> What is happening?
+> **What is happening?**
 
-> Where is the risk?
+> **Where is the risk?**
 
-> What should we do?
+> **What should we do?**
+
+---
+
+# Application Screenshots
+
+## Executive Overview
+
+Management-level visibility into supply-chain performance, inventory exposure, stockout risks, and operational priorities.
+
+![Executive Overview](docs/screenshots/executif.png)
+
+---
+
+## Executive Risk Intelligence
+
+A complementary executive view highlighting operational risk indicators and areas requiring management attention.
+
+![Executive Risk Intelligence](docs/screenshots/executif1.png)
+
+---
+
+## Inventory Intelligence
+
+Store- and product-level inventory visibility for monitoring stock positions and inventory health.
+
+![Inventory Intelligence](docs/screenshots/inventory.png)
+
+---
+
+## Stockout Risk Intelligence
+
+Prioritized stockout alerts based on inventory positions and recent demand.
+
+![Stockout Risk Intelligence](docs/screenshots/stockout%20risk.png)
+
+---
+
+## Intelligent Stock Transfers
+
+Inventory rebalancing recommendations identifying donor stores, receiver stores, available stock, uncovered demand, and proposed transfer quantities.
+
+![Stock Transfer Recommendations](docs/screenshots/Stock%20transfert.png)
+
+---
+
+## Critical Actions
+
+Prioritized operational actions generated from supply-chain risk signals.
+
+![Critical Actions](docs/screenshots/critical%20action.png)
+
+---
+
+## Supply Chain AI Assistant
+
+Natural-language decision-support interface for querying supply-chain information and obtaining grounded operational insights.
+
+![Supply Chain AI Assistant](docs/screenshots/ai%20assistant.png)
 
 ---
 
@@ -292,7 +357,11 @@ enterprise-ai-supply-chain-platform/
 |   |-- api/
 |   |   `-- routes/
 |   |
+|   |-- core/
+|   |
 |   |-- db/
+|   |
+|   |-- schemas/
 |   |
 |   `-- services/
 |       |-- ai_assistant.py
@@ -302,6 +371,9 @@ enterprise-ai-supply-chain-platform/
 |       |-- grounding.py
 |       |-- intent_router.py
 |       `-- ollama.py
+|
+|-- docs/
+|   `-- screenshots/
 |
 |-- frontend/
 |   |-- src/
@@ -337,55 +409,21 @@ enterprise-ai-supply-chain-platform/
 
 ---
 
-## Screenshots
-
-The application includes six major operational views:
-
-### Executive Overview
-
-Management-level visibility into supply-chain risks and operational performance.
-
-### Inventory Intelligence
-
-Inventory visibility across products and stores.
-
-### Stockout Risks
-
-Prioritized stockout alerts based on inventory and recent demand.
-
-### Stock Transfers
-
-AI-ready inventory rebalancing recommendations between donor and receiver stores.
-
-### Critical Actions
-
-Prioritized management actions generated from operational risk signals.
-
-### Supply Chain AI Assistant
-
-Natural-language interface for supply-chain decision support.
-
-> Screenshots can be added to a `docs/screenshots/` directory and referenced from this section.
-
----
-
 ## Running the Backend
 
-Create and activate the Python environment, install dependencies, and configure the environment variables.
+Install the Python dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Create the local environment configuration from:
+Create your local environment configuration based on:
 
 ```text
 .env.example
 ```
 
-Then start the FastAPI application according to the project configuration.
-
-Example:
+Then start the FastAPI application:
 
 ```bash
 uvicorn app.main:app --reload
@@ -413,7 +451,7 @@ Start the development server:
 npm run dev
 ```
 
-Production build:
+Create a production build:
 
 ```bash
 npm run build
@@ -429,6 +467,7 @@ Use the provided:
 
 ```text
 .env.example
+frontend/.env.example
 ```
 
 to configure the required environment variables locally.
@@ -437,6 +476,7 @@ Do **not** commit:
 
 ```text
 .env
+frontend/.env
 Databricks access tokens
 database credentials
 API secrets
@@ -463,9 +503,9 @@ python scripts/validate_ai_assistant.py
 
 ## Business Value
 
-This project demonstrates how a modern data platform can evolve beyond dashboards.
+This project demonstrates how a modern data platform can evolve beyond traditional dashboards.
 
-Traditional BI typically answers:
+Traditional Business Intelligence typically answers:
 
 ```text
 What happened?
@@ -506,58 +546,71 @@ The architecture can support retail and distribution environments requiring:
 
 ## Engineering Focus
 
-This portfolio project demonstrates practical experience across:
+This portfolio project demonstrates practical experience across multiple areas.
 
-**Data Engineering**
+### Data Engineering
 
-Databricks, analytical data modeling, transformations, marts, serving datasets.
+Databricks, Lakehouse architecture, analytical data modeling, transformations, marts, and serving datasets.
 
-**Data Analytics**
+### Data Analytics
 
-Inventory analysis, demand indicators, stockout detection, store/product risk analysis.
+Inventory analysis, demand indicators, stockout detection, and store/product risk analysis.
 
-**Backend Engineering**
+### Backend Engineering
 
-FastAPI, REST APIs, Databricks query integration, application services.
+FastAPI, REST APIs, Databricks query integration, and application services.
 
-**Frontend Engineering**
+### Frontend Engineering
 
-React, Material UI, responsive operational dashboards.
+React, Material UI, Axios, responsive operational interfaces, and decision-support dashboards.
 
-**Artificial Intelligence**
+### Artificial Intelligence
 
-Natural-language interaction, intent routing, grounding, decision context, local LLM integration.
+Natural-language interaction, intent routing, grounding, decision context, AI services, and local LLM integration.
 
-**Decision Intelligence**
+### Decision Intelligence
 
-Transforming analytical signals into prioritized operational recommendations and actions.
+Transforming analytical signals into prioritized operational recommendations and management actions.
 
 ---
 
 ## Security
 
-The public repository should contain only code and non-sensitive examples.
+The public repository contains only application code, documentation, screenshots, and non-sensitive configuration examples intended for demonstration purposes.
 
-Production credentials, access tokens, private business datasets, and infrastructure secrets must remain outside version control.
+Sensitive information must remain outside version control, including:
+
+- production credentials
+- access tokens
+- private datasets
+- database passwords
+- API secrets
+- private infrastructure configuration
+
+The `.gitignore` configuration prevents local environment files and generated application artifacts from being committed.
 
 ---
 
 ## Project Status
 
-**Functional end-to-end prototype**
+**Functional End-to-End Prototype**
 
-Implemented components:
+Implemented components include:
 
-- Databricks analytical layer
-- Supply-chain risk intelligence
-- Stockout alerts
-- Stock-transfer recommendations
-- Critical-action prioritization
+- Databricks analytical architecture
+- Gold analytical datasets
+- decision-oriented marts
+- serving layer
+- supply-chain risk intelligence
+- inventory intelligence
+- stockout alerts
+- stock-transfer recommendations
+- critical-action prioritization
 - FastAPI serving backend
 - React operational command center
 - AI assistant architecture
-- Local LLM integration
-- Production frontend build validation
+- local LLM integration with Ollama
+- production frontend build validation
 
 ---
 
@@ -565,7 +618,7 @@ Implemented components:
 
 **Ruben KANKU**
 
-Data & AI | Business Intelligence | Digital Transformation
+**Data & AI | Business Intelligence | Digital Transformation**
 
 Democratic Republic of the Congo
 
@@ -573,6 +626,8 @@ Democratic Republic of the Congo
 
 ## Disclaimer
 
-This repository is a portfolio and demonstration project.
+This repository is a **portfolio and demonstration project**.
 
-Any operational data used during development should be treated according to the applicable confidentiality and data-governance requirements. Sensitive source datasets and credentials are not intended for public distribution.
+Operational data used during development should be handled according to applicable confidentiality and data-governance requirements.
+
+Sensitive source datasets, credentials, access tokens, and private infrastructure information are not intended for public distribution.
