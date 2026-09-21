@@ -563,7 +563,7 @@ Implemented components:
 
 ## Author
 
-**Emmanuel Joël Ndolo Ndolo Mayunda**
+**Ruben KANKU**
 
 Data & AI | Business Intelligence | Digital Transformation
 
